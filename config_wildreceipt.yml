@@ -1,0 +1,41 @@
+Global:
+  epoch_num: 10
+  eval_during_train: True
+  save_model_dir: './output'
+  save_epoch_step: 5
+  print_batch_step: 10
+
+Architecture:
+  model_type: 'InvoiceClassifier'
+  num_classes: 26
+
+Optimizer:
+  name: Adam
+  lr: 0.001
+  beta1: 0.9
+  beta2: 0.999
+
+Loss:
+  name: CrossEntropyLoss
+
+Train:
+  dataset:
+    name: InvoiceDataset
+    data_dir: train_data/wildreceipt_paddleocr/train
+    annotation_file: train_data/wildreceipt_paddleocr/train/train.json
+    class_list: train_data/wildreceipt_paddleocr/class_list.txt
+  loader:
+    shuffle: True
+    batch_size: 8
+    num_workers: 4
+
+Eval:
+  dataset:
+    name: InvoiceDataset  
+    data_dir: train_data/wildreceipt_paddleocr/val
+    annotation_file: train_data/wildreceipt_paddleocr/val/val.json
+    class_list: train_data/wildreceipt_paddleocr/class_list.txt
+  loader:
+    shuffle: False
+    batch_size: 8
+    num_workers: 4
