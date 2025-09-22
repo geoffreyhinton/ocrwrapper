@@ -1,0 +1,1052 @@
+{
+  "image": "wildreceipt_test.jpg",
+  "processing_time": 3.071510076522827,
+  "total_text_elements": 21,
+  "classified_elements": [
+    {
+      "text": "KOREAN RESTAURANT",
+      "bbox": [
+        [
+          92,
+          0
+        ],
+        [
+          253,
+          0
+        ],
+        [
+          253,
+          21
+        ],
+        [
+          92,
+          17
+        ]
+      ],
+      "ocr_confidence": 0.9979745149612427,
+      "predicted_class": "Store_name_value",
+      "class_confidence": 0.9
+    },
+    {
+      "text": "2621 ORANGETHORPE AVE, FULLERTON.",
+      "bbox": [
+        [
+          17,
+          14
+        ],
+        [
+          316,
+          20
+        ],
+        [
+          315,
+          44
+        ],
+        [
+          17,
+          37
+        ]
+      ],
+      "ocr_confidence": 0.9833123087882996,
+      "predicted_class": "Store_addr_value",
+      "class_confidence": 0.95
+    },
+    {
+      "text": "(714)879-3574",
+      "bbox": [
+        [
+          38,
+          35
+        ],
+        [
+          298,
+          40
+        ],
+        [
+          297,
+          63
+        ],
+        [
+          37,
+          59
+        ]
+      ],
+      "ocr_confidence": 0.9886597990989685,
+      "predicted_class": "Tel_value",
+      "class_confidence": 0.9
+    },
+    {
+      "text": "THANK YOU !!",
+      "bbox": [
+        [
+          72,
+          58
+        ],
+        [
+          271,
+          60
+        ],
+        [
+          271,
+          81
+        ],
+        [
+          72,
+          79
+        ]
+      ],
+      "ocr_confidence": 0.9186778664588928,
+      "predicted_class": "Store_name_value",
+      "class_confidence": 0.7
+    },
+    {
+      "text": "DATE 12/30/2016 FRI",
+      "bbox": [
+        [
+          14,
+          103
+        ],
+        [
+          200,
+          103
+        ],
+        [
+          200,
+          124
+        ],
+        [
+          14,
+          124
+        ]
+      ],
+      "ocr_confidence": 0.9959452748298645,
+      "predicted_class": "Date_value",
+      "class_confidence": 0.95
+    },
+    {
+      "text": "TIME 19:19",
+      "bbox": [
+        [
+          223,
+          104
+        ],
+        [
+          320,
+          104
+        ],
+        [
+          320,
+          125
+        ],
+        [
+          223,
+          125
+        ]
+      ],
+      "ocr_confidence": 0.9818717241287231,
+      "predicted_class": "Time_value",
+      "class_confidence": 0.95
+    },
+    {
+      "text": "BIBIM.OCTOPU T1",
+      "bbox": [
+        [
+          9,
+          144
+        ],
+        [
+          158,
+          144
+        ],
+        [
+          158,
+          165
+        ],
+        [
+          9,
+          165
+        ]
+      ],
+      "ocr_confidence": 0.997294545173645,
+      "predicted_class": "Prod_item_value",
+      "class_confidence": 0.8
+    },
+    {
+      "text": "$13.99",
+      "bbox": [
+        [
+          263,
+          146
+        ],
+        [
+          322,
+          146
+        ],
+        [
+          322,
+          168
+        ],
+        [
+          263,
+          168
+        ]
+      ],
+      "ocr_confidence": 0.9999039769172668,
+      "predicted_class": "Prod_price_value",
+      "class_confidence": 0.9
+    },
+    {
+      "text": "S-FOOD P.CAK T1",
+      "bbox": [
+        [
+          7,
+          168
+        ],
+        [
+          159,
+          168
+        ],
+        [
+          159,
+          189
+        ],
+        [
+          7,
+          189
+        ]
+      ],
+      "ocr_confidence": 0.9976279735565186,
+      "predicted_class": "Store_name_value",
+      "class_confidence": 0.7
+    },
+    {
+      "text": "$14.99",
+      "bbox": [
+        [
+          264,
+          169
+        ],
+        [
+          324,
+          169
+        ],
+        [
+          324,
+          191
+        ],
+        [
+          264,
+          191
+        ]
+      ],
+      "ocr_confidence": 0.9998680949211121,
+      "predicted_class": "Prod_price_value",
+      "class_confidence": 0.9
+    },
+    {
+      "text": "PORK DUMPLIN T1",
+      "bbox": [
+        [
+          4,
+          192
+        ],
+        [
+          158,
+          192
+        ],
+        [
+          158,
+          213
+        ],
+        [
+          4,
+          213
+        ]
+      ],
+      "ocr_confidence": 0.9939028024673462,
+      "predicted_class": "Prod_item_value",
+      "class_confidence": 0.8
+    },
+    {
+      "text": "$8.99",
+      "bbox": [
+        [
+          272,
+          191
+        ],
+        [
+          326,
+          188
+        ],
+        [
+          328,
+          213
+        ],
+        [
+          273,
+          216
+        ]
+      ],
+      "ocr_confidence": 0.9999639391899109,
+      "predicted_class": "Prod_price_value",
+      "class_confidence": 0.9
+    },
+    {
+      "text": "LA BEEF RIB T1",
+      "bbox": [
+        [
+          1,
+          216
+        ],
+        [
+          147,
+          214
+        ],
+        [
+          147,
+          236
+        ],
+        [
+          1,
+          237
+        ]
+      ],
+      "ocr_confidence": 0.9548512101173401,
+      "predicted_class": "Prod_item_value",
+      "class_confidence": 0.8
+    },
+    {
+      "text": "$17.99",
+      "bbox": [
+        [
+          264,
+          215
+        ],
+        [
+          330,
+          212
+        ],
+        [
+          330,
+          237
+        ],
+        [
+          265,
+          240
+        ]
+      ],
+      "ocr_confidence": 0.9999260902404785,
+      "predicted_class": "Prod_price_value",
+      "class_confidence": 0.9
+    },
+    {
+      "text": "4.00xITEMS",
+      "bbox": [
+        [
+          116,
+          239
+        ],
+        [
+          221,
+          239
+        ],
+        [
+          221,
+          263
+        ],
+        [
+          116,
+          263
+        ]
+      ],
+      "ocr_confidence": 0.9893690943717957,
+      "predicted_class": "Prod_quantity_value",
+      "class_confidence": 0.85
+    },
+    {
+      "text": "SUBTOTAL",
+      "bbox": [
+        [
+          0,
+          266
+        ],
+        [
+          87,
+          266
+        ],
+        [
+          87,
+          291
+        ],
+        [
+          0,
+          291
+        ]
+      ],
+      "ocr_confidence": 0.9998106360435486,
+      "predicted_class": "Total_key",
+      "class_confidence": 0.95
+    },
+    {
+      "text": "$55.96",
+      "bbox": [
+        [
+          268,
+          263
+        ],
+        [
+          335,
+          261
+        ],
+        [
+          336,
+          289
+        ],
+        [
+          269,
+          292
+        ]
+      ],
+      "ocr_confidence": 0.995110273361206,
+      "predicted_class": "Prod_price_value",
+      "class_confidence": 0.9
+    },
+    {
+      "text": "TAX1",
+      "bbox": [
+        [
+          0,
+          292
+        ],
+        [
+          44,
+          292
+        ],
+        [
+          44,
+          317
+        ],
+        [
+          0,
+          317
+        ]
+      ],
+      "ocr_confidence": 0.9998583793640137,
+      "predicted_class": "Tax_key",
+      "class_confidence": 0.95
+    },
+    {
+      "text": "$4.48",
+      "bbox": [
+        [
+          278,
+          291
+        ],
+        [
+          338,
+          288
+        ],
+        [
+          339,
+          317
+        ],
+        [
+          280,
+          320
+        ]
+      ],
+      "ocr_confidence": 0.9998964071273804,
+      "predicted_class": "Prod_price_value",
+      "class_confidence": 0.9
+    },
+    {
+      "text": "TOTAL",
+      "bbox": [
+        [
+          0,
+          318
+        ],
+        [
+          53,
+          318
+        ],
+        [
+          53,
+          344
+        ],
+        [
+          0,
+          344
+        ]
+      ],
+      "ocr_confidence": 0.9996362924575806,
+      "predicted_class": "Total_key",
+      "class_confidence": 0.95
+    },
+    {
+      "text": "$60.44",
+      "bbox": [
+        [
+          269,
+          318
+        ],
+        [
+          339,
+          314
+        ],
+        [
+          341,
+          343
+        ],
+        [
+          271,
+          346
+        ]
+      ],
+      "ocr_confidence": 0.9982050061225891,
+      "predicted_class": "Prod_price_value",
+      "class_confidence": 0.9
+    }
+  ],
+  "organized_by_class": {
+    "Store_name_value": [
+      {
+        "text": "KOREAN RESTAURANT",
+        "bbox": [
+          [
+            92,
+            0
+          ],
+          [
+            253,
+            0
+          ],
+          [
+            253,
+            21
+          ],
+          [
+            92,
+            17
+          ]
+        ],
+        "ocr_confidence": 0.9979745149612427,
+        "predicted_class": "Store_name_value",
+        "class_confidence": 0.9
+      },
+      {
+        "text": "THANK YOU !!",
+        "bbox": [
+          [
+            72,
+            58
+          ],
+          [
+            271,
+            60
+          ],
+          [
+            271,
+            81
+          ],
+          [
+            72,
+            79
+          ]
+        ],
+        "ocr_confidence": 0.9186778664588928,
+        "predicted_class": "Store_name_value",
+        "class_confidence": 0.7
+      },
+      {
+        "text": "S-FOOD P.CAK T1",
+        "bbox": [
+          [
+            7,
+            168
+          ],
+          [
+            159,
+            168
+          ],
+          [
+            159,
+            189
+          ],
+          [
+            7,
+            189
+          ]
+        ],
+        "ocr_confidence": 0.9976279735565186,
+        "predicted_class": "Store_name_value",
+        "class_confidence": 0.7
+      }
+    ],
+    "Store_addr_value": [
+      {
+        "text": "2621 ORANGETHORPE AVE, FULLERTON.",
+        "bbox": [
+          [
+            17,
+            14
+          ],
+          [
+            316,
+            20
+          ],
+          [
+            315,
+            44
+          ],
+          [
+            17,
+            37
+          ]
+        ],
+        "ocr_confidence": 0.9833123087882996,
+        "predicted_class": "Store_addr_value",
+        "class_confidence": 0.95
+      }
+    ],
+    "Tel_value": [
+      {
+        "text": "(714)879-3574",
+        "bbox": [
+          [
+            38,
+            35
+          ],
+          [
+            298,
+            40
+          ],
+          [
+            297,
+            63
+          ],
+          [
+            37,
+            59
+          ]
+        ],
+        "ocr_confidence": 0.9886597990989685,
+        "predicted_class": "Tel_value",
+        "class_confidence": 0.9
+      }
+    ],
+    "Date_value": [
+      {
+        "text": "DATE 12/30/2016 FRI",
+        "bbox": [
+          [
+            14,
+            103
+          ],
+          [
+            200,
+            103
+          ],
+          [
+            200,
+            124
+          ],
+          [
+            14,
+            124
+          ]
+        ],
+        "ocr_confidence": 0.9959452748298645,
+        "predicted_class": "Date_value",
+        "class_confidence": 0.95
+      }
+    ],
+    "Time_value": [
+      {
+        "text": "TIME 19:19",
+        "bbox": [
+          [
+            223,
+            104
+          ],
+          [
+            320,
+            104
+          ],
+          [
+            320,
+            125
+          ],
+          [
+            223,
+            125
+          ]
+        ],
+        "ocr_confidence": 0.9818717241287231,
+        "predicted_class": "Time_value",
+        "class_confidence": 0.95
+      }
+    ],
+    "Prod_item_value": [
+      {
+        "text": "BIBIM.OCTOPU T1",
+        "bbox": [
+          [
+            9,
+            144
+          ],
+          [
+            158,
+            144
+          ],
+          [
+            158,
+            165
+          ],
+          [
+            9,
+            165
+          ]
+        ],
+        "ocr_confidence": 0.997294545173645,
+        "predicted_class": "Prod_item_value",
+        "class_confidence": 0.8
+      },
+      {
+        "text": "PORK DUMPLIN T1",
+        "bbox": [
+          [
+            4,
+            192
+          ],
+          [
+            158,
+            192
+          ],
+          [
+            158,
+            213
+          ],
+          [
+            4,
+            213
+          ]
+        ],
+        "ocr_confidence": 0.9939028024673462,
+        "predicted_class": "Prod_item_value",
+        "class_confidence": 0.8
+      },
+      {
+        "text": "LA BEEF RIB T1",
+        "bbox": [
+          [
+            1,
+            216
+          ],
+          [
+            147,
+            214
+          ],
+          [
+            147,
+            236
+          ],
+          [
+            1,
+            237
+          ]
+        ],
+        "ocr_confidence": 0.9548512101173401,
+        "predicted_class": "Prod_item_value",
+        "class_confidence": 0.8
+      }
+    ],
+    "Prod_price_value": [
+      {
+        "text": "$13.99",
+        "bbox": [
+          [
+            263,
+            146
+          ],
+          [
+            322,
+            146
+          ],
+          [
+            322,
+            168
+          ],
+          [
+            263,
+            168
+          ]
+        ],
+        "ocr_confidence": 0.9999039769172668,
+        "predicted_class": "Prod_price_value",
+        "class_confidence": 0.9
+      },
+      {
+        "text": "$14.99",
+        "bbox": [
+          [
+            264,
+            169
+          ],
+          [
+            324,
+            169
+          ],
+          [
+            324,
+            191
+          ],
+          [
+            264,
+            191
+          ]
+        ],
+        "ocr_confidence": 0.9998680949211121,
+        "predicted_class": "Prod_price_value",
+        "class_confidence": 0.9
+      },
+      {
+        "text": "$8.99",
+        "bbox": [
+          [
+            272,
+            191
+          ],
+          [
+            326,
+            188
+          ],
+          [
+            328,
+            213
+          ],
+          [
+            273,
+            216
+          ]
+        ],
+        "ocr_confidence": 0.9999639391899109,
+        "predicted_class": "Prod_price_value",
+        "class_confidence": 0.9
+      },
+      {
+        "text": "$17.99",
+        "bbox": [
+          [
+            264,
+            215
+          ],
+          [
+            330,
+            212
+          ],
+          [
+            330,
+            237
+          ],
+          [
+            265,
+            240
+          ]
+        ],
+        "ocr_confidence": 0.9999260902404785,
+        "predicted_class": "Prod_price_value",
+        "class_confidence": 0.9
+      },
+      {
+        "text": "$55.96",
+        "bbox": [
+          [
+            268,
+            263
+          ],
+          [
+            335,
+            261
+          ],
+          [
+            336,
+            289
+          ],
+          [
+            269,
+            292
+          ]
+        ],
+        "ocr_confidence": 0.995110273361206,
+        "predicted_class": "Prod_price_value",
+        "class_confidence": 0.9
+      },
+      {
+        "text": "$4.48",
+        "bbox": [
+          [
+            278,
+            291
+          ],
+          [
+            338,
+            288
+          ],
+          [
+            339,
+            317
+          ],
+          [
+            280,
+            320
+          ]
+        ],
+        "ocr_confidence": 0.9998964071273804,
+        "predicted_class": "Prod_price_value",
+        "class_confidence": 0.9
+      },
+      {
+        "text": "$60.44",
+        "bbox": [
+          [
+            269,
+            318
+          ],
+          [
+            339,
+            314
+          ],
+          [
+            341,
+            343
+          ],
+          [
+            271,
+            346
+          ]
+        ],
+        "ocr_confidence": 0.9982050061225891,
+        "predicted_class": "Prod_price_value",
+        "class_confidence": 0.9
+      }
+    ],
+    "Prod_quantity_value": [
+      {
+        "text": "4.00xITEMS",
+        "bbox": [
+          [
+            116,
+            239
+          ],
+          [
+            221,
+            239
+          ],
+          [
+            221,
+            263
+          ],
+          [
+            116,
+            263
+          ]
+        ],
+        "ocr_confidence": 0.9893690943717957,
+        "predicted_class": "Prod_quantity_value",
+        "class_confidence": 0.85
+      }
+    ],
+    "Total_key": [
+      {
+        "text": "SUBTOTAL",
+        "bbox": [
+          [
+            0,
+            266
+          ],
+          [
+            87,
+            266
+          ],
+          [
+            87,
+            291
+          ],
+          [
+            0,
+            291
+          ]
+        ],
+        "ocr_confidence": 0.9998106360435486,
+        "predicted_class": "Total_key",
+        "class_confidence": 0.95
+      },
+      {
+        "text": "TOTAL",
+        "bbox": [
+          [
+            0,
+            318
+          ],
+          [
+            53,
+            318
+          ],
+          [
+            53,
+            344
+          ],
+          [
+            0,
+            344
+          ]
+        ],
+        "ocr_confidence": 0.9996362924575806,
+        "predicted_class": "Total_key",
+        "class_confidence": 0.95
+      }
+    ],
+    "Tax_key": [
+      {
+        "text": "TAX1",
+        "bbox": [
+          [
+            0,
+            292
+          ],
+          [
+            44,
+            292
+          ],
+          [
+            44,
+            317
+          ],
+          [
+            0,
+            317
+          ]
+        ],
+        "ocr_confidence": 0.9998583793640137,
+        "predicted_class": "Tax_key",
+        "class_confidence": 0.95
+      }
+    ]
+  },
+  "summary": {
+    "classes_found": [
+      "Store_name_value",
+      "Store_addr_value",
+      "Tel_value",
+      "Date_value",
+      "Time_value",
+      "Prod_item_value",
+      "Prod_price_value",
+      "Prod_quantity_value",
+      "Total_key",
+      "Tax_key"
+    ],
+    "total_classes": 10
+  }
+}
