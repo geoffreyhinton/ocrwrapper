@@ -1,0 +1,36 @@
+# Training data directory - too large for git
+train_data/
+
+# Virtual environment
+paddle_venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Model outputs
+output/
+*.pdparams
+*.pdopt
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
