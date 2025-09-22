@@ -100,6 +100,10 @@ class InvoiceDataset(Dataset):
             # Load image
             image = Image.open(data['img_path']).convert('RGB')
             
+            # Resize image to standard size (224x224 for LayoutML)
+            target_size = (224, 224)
+            image = image.resize(target_size, Image.Resampling.LANCZOS)
+            
             # Convert to tensor for training
             image_array = np.array(image).astype(np.float32) / 255.0
             image_tensor = paddle.to_tensor(image_array.transpose(2, 0, 1))  # HWC to CHW
@@ -110,35 +114,46 @@ class InvoiceDataset(Dataset):
             # Extract OCR information
             ocr_info = annotation.get('ocr_info', [])
             
-            # Prepare labels and bboxes
+            # For this simplified approach, we'll use the most common label in the image
+            # In a real implementation, you'd process each text region separately
             labels = []
-            bboxes = []
-            texts = []
             
             for item in ocr_info:
-                label = item.get('label', 'OTHER')
-                label_id = self.class_to_id.get(label, 0)  # Default to 0 (OTHER)
+                original_label = item.get('label', 'OTHER')
                 
-                bbox = item.get('bbox', [0, 0, 0, 0])
-                text = item.get('text', '')
+                # Map WildReceipt labels to training class labels
+                label_mapping = {
+                    'COMPANY': 'Store_name_value',
+                    'ADDRESS': 'Store_addr_value', 
+                    'DATE': 'Date_value',
+                    'TIME': 'Time_value',
+                    'PHONE': 'Tel_value',
+                    'PRODUCT': 'Prod_item_value',
+                    'PRICE': 'Prod_price_value',
+                    'QUANTITY': 'Prod_quantity_value',
+                    'SUBTOTAL': 'Subtotal_value',
+                    'TAX': 'Tax_value',
+                    'TOTAL': 'Total_value',
+                    'OTHER': 'Others'
+                }
                 
+                # Convert the label
+                label = label_mapping.get(original_label, 'Others')
+                label_id = self.class_to_id.get(label, 25)  # Default to 25 (Others)
                 labels.append(label_id)
-                bboxes.append(bbox)
-                texts.append(text)
             
-            # Convert to tensors
+            # Use the most frequent label for the entire image
             if labels:
-                labels = paddle.to_tensor(labels, dtype='int64')
-                bboxes = paddle.to_tensor(bboxes, dtype='float32')
+                label = max(set(labels), key=labels.count)
             else:
-                labels = paddle.zeros([1], dtype='int64')
-                bboxes = paddle.zeros([1, 4], dtype='float32')
+                label = 25  # Default to 'Others'
+            
+            # Convert to tensor
+            label_tensor = paddle.to_tensor([label], dtype='int64')
             
             return {
                 'image': image_tensor,
-                'labels': labels,
-                'bboxes': bboxes,
-                'texts': texts,
+                'labels': label_tensor,
                 'img_path': data['img_path']
             }
             
@@ -155,37 +170,26 @@ class InvoiceDataset(Dataset):
             }
 
 
-class SimpleLayoutMLModel(nn.Layer):
-    """Simplified LayoutML model for demonstration"""
+class InvoiceClassifier(nn.Layer):
+    """Invoice classifier model (matches the working model)"""
     
-    def __init__(self, num_classes):
-        super().__init__()
-        self.num_classes = num_classes
-        
-        # Simple CNN backbone
+    def __init__(self, num_classes=26):
+        super(InvoiceClassifier, self).__init__()
         self.conv1 = nn.Conv2D(3, 64, 3, padding=1)
         self.conv2 = nn.Conv2D(64, 128, 3, padding=1)
         self.conv3 = nn.Conv2D(128, 256, 3, padding=1)
-        
-        self.pool = nn.AdaptiveAvgPool2D((1, 1))
         self.classifier = nn.Linear(256, num_classes)
         
-        self.dropout = nn.Dropout(0.1)
-    
-    def forward(self, batch):
-        # This is a simplified forward pass
-        # In a real LayoutML model, you would process the layout information
-        
-        # For demonstration, we'll just return dummy predictions
-        batch_size = len(batch['texts']) if isinstance(batch['texts'], list) else 1
-        
-        # Return dummy predictions
-        predictions = paddle.randn([batch_size, self.num_classes])
-        
-        return {
-            'predictions': predictions,
-            'backbone_out': predictions
-        }
+    def forward(self, x):
+        x = paddle.nn.functional.relu(self.conv1(x))
+        x = paddle.nn.functional.max_pool2d(x, 2)
+        x = paddle.nn.functional.relu(self.conv2(x))
+        x = paddle.nn.functional.max_pool2d(x, 2)
+        x = paddle.nn.functional.relu(self.conv3(x))
+        x = paddle.nn.functional.max_pool2d(x, 2)
+        x = paddle.nn.functional.adaptive_avg_pool2d(x, 1)
+        x = paddle.flatten(x, 1)
+        return self.classifier(x)
 
 
 class VQASerTokenLayoutLMLoss(nn.Layer):
@@ -226,11 +230,14 @@ def train_one_epoch(model, optimizer, train_loader, loss_fn, epoch, config, logg
     
     for batch_idx, batch in enumerate(train_loader):
         try:
-            # Forward pass
-            preds = model(batch)
+            # Extract images from batch
+            images = batch['image']
+            
+            # Forward pass - pass images directly to the model
+            preds = model(images)
             
             # Calculate loss
-            loss_dict = loss_fn(preds, batch)
+            loss_dict = loss_fn({'predictions': preds}, batch)
             loss = loss_dict['loss']
             
             # Backward pass
@@ -242,7 +249,8 @@ def train_one_epoch(model, optimizer, train_loader, loss_fn, epoch, config, logg
             total_samples += 1
             
             # Log progress
-            if batch_idx % config['Global']['print_batch_step'] == 0:
+            print_batch_step = config['Global'].get('print_batch_step', 10)
+            if batch_idx % print_batch_step == 0:
                 logger.info(f'Epoch [{epoch}] Batch [{batch_idx}] Loss: {float(loss.numpy()):.6f}')
                 
         except Exception as e:
@@ -271,6 +279,28 @@ def save_model(model, optimizer, save_dir, epoch):
     paddle.save(checkpoint, latest_path)
     
     print(f"Model saved to {checkpoint_path}")
+
+
+def collate_fn(batch):
+    """Collate function to handle batching"""
+    images = []
+    labels = []
+    img_paths = []
+    
+    for item in batch:
+        images.append(item['image'])
+        labels.append(item['labels'][0])  # Extract single label
+        img_paths.append(item['img_path'])
+    
+    # Stack images and labels
+    images = paddle.stack(images, axis=0)
+    labels = paddle.to_tensor(labels, dtype='int64')
+    
+    return {
+        'image': images,
+        'labels': labels,
+        'img_paths': img_paths
+    }
 
 
 def main():
@@ -302,28 +332,33 @@ def main():
     try:
         # Build datasets
         logger.info("Building datasets...")
-        train_dataset = InvoiceDataset(args.data_dir, args.class_list, mode='train')
+        # Use config file paths instead of command line args
+        train_data_dir = config['Train']['dataset']['data_dir']
+        train_class_list = config['Train']['dataset']['class_list']
+        train_dataset = InvoiceDataset(train_data_dir, train_class_list, mode='train')
         
         train_loader = DataLoader(
             train_dataset,
-            batch_size=config['Global'].get('batch_size', 1),
-            shuffle=True,
-            num_workers=0  # Set to 0 to avoid multiprocessing issues
+            batch_size=config['Train']['loader'].get('batch_size', 8),
+            shuffle=config['Train']['loader'].get('shuffle', True),
+            num_workers=0,  # Set to 0 to avoid multiprocessing issues
+            collate_fn=collate_fn
         )
         
         # Build model
         logger.info("Building model...")
-        model = SimpleLayoutMLModel(train_dataset.num_classes)
+        num_classes = config['Architecture'].get('num_classes', train_dataset.num_classes)
+        model = InvoiceClassifier(num_classes)
         
         # Build loss function
         logger.info("Building loss function...")
-        loss_fn = VQASerTokenLayoutLMLoss(train_dataset.num_classes)
+        loss_fn = VQASerTokenLayoutLMLoss(num_classes)
         
         # Build optimizer
         logger.info("Building optimizer...")
         optimizer = AdamW(
             parameters=model.parameters(),
-            learning_rate=config['Optimizer'].get('lr', {}).get('learning_rate', 0.00005),
+            learning_rate=config['Optimizer'].get('lr', 0.00005),
             weight_decay=0.01
         )
         
