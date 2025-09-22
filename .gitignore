@@ -15,7 +15,6 @@ __pycache__/
 
 # Model outputs
 output/
-*.pdparams
 *.pdopt
 
 # Jupyter Notebook
