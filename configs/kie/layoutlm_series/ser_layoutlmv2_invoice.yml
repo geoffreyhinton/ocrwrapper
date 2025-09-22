@@ -1,0 +1,125 @@
+Global:
+  use_gpu: True
+  epoch_num: &epoch_num 200
+  log_smooth_window: 10
+  print_batch_step: 10
+  save_model_dir: ./output/ser_layoutlmv2_invoice/
+  save_epoch_step: 2000
+  eval_batch_step: [ 0, 19 ]
+  cal_metric_during_train: False
+  save_inference_dir:
+  use_visualdl: False
+  seed: 2022
+  infer_img: train_data/invoice_dataset/val/image/sample_invoice.jpg
+  save_res_path: ./output/ser_layoutlmv2_invoice/res/
+
+Architecture:
+  model_type: kie
+  algorithm: &algorithm "LayoutLMv2"
+  Transform:
+  Backbone:
+    name: LayoutLMv2ForSer
+    pretrained: True
+    checkpoints:
+    num_classes: &num_classes 12  # Number of invoice categories
+
+Loss:
+  name: VQASerTokenLayoutLMLoss
+  num_classes: *num_classes
+  key: "backbone_out"
+
+Optimizer:
+  name: AdamW
+  beta1: 0.9
+  beta2: 0.999
+  lr:
+    name: Linear
+    learning_rate: 0.00005
+    epochs: *epoch_num
+    warmup_epoch: 2
+  regularizer:
+    name: L2
+    factor: 0.00000
+    
+PostProcess:
+  name: VQASerTokenLayoutLMPostProcess
+  class_path: &class_path train_data/invoice_dataset/class_list_invoice.txt
+
+Metric:
+  name: VQASerTokenMetric
+  main_indicator: hmean
+
+Train:
+  dataset:
+    name: SimpleDataSet
+    data_dir: train_data/invoice_dataset/train/image
+    label_file_list:
+      - train_data/invoice_dataset/train/train.json
+    ratio_list: [ 1.0 ]
+    transforms:
+      - DecodeImage:
+          img_mode: RGB
+          channel_first: False
+      - VQATokenLabelEncode:
+          contains_re: False
+          algorithm: *algorithm
+          class_path: *class_path
+      - VQATokenPad:
+          max_seq_len: &max_seq_len 512
+          return_attention_mask: True
+      - VQASerTokenChunk:
+          max_seq_len: *max_seq_len
+      - Resize:
+          size: [224,224]
+      - NormalizeImage:
+          scale: 1./255.
+          mean: [0.485, 0.456, 0.406]
+          std: [0.229, 0.224, 0.225]
+          order: 'hwc'
+      - ToCHWImage:
+      - KeepKeys:
+          keep_keys: [ 'input_ids', 'bbox', 'attention_mask', 'token_type_ids', 'image', 'labels']
+
+  loader:
+    shuffle: True
+    drop_last: False
+    batch_size_per_card: 8
+    num_workers: 8
+    collate_fn: ListCollator
+
+Eval:
+  dataset:
+    name: SimpleDataSet
+    data_dir: train_data/invoice_dataset/val/image
+    label_file_list:
+      - train_data/invoice_dataset/val/val.json
+    transforms:
+      - DecodeImage:
+          img_mode: RGB
+          channel_first: False
+      - VQATokenLabelEncode:
+          contains_re: False
+          algorithm: *algorithm
+          class_path: *class_path
+      - VQATokenPad:
+          max_seq_len: *max_seq_len
+          return_attention_mask: True
+      - VQASerTokenChunk:
+          max_seq_len: *max_seq_len
+      - Resize:
+          size: [224,224]
+      - NormalizeImage:
+          scale: 1./255.
+          mean: [0.485, 0.456, 0.406]
+          std: [0.229, 0.224, 0.225]
+          order: 'hwc'
+      - ToCHWImage:
+      - KeepKeys:
+          keep_keys: [ 'input_ids', 'bbox', 'attention_mask', 'token_type_ids', 'image', 'labels']
+
+  loader:
+    shuffle: False
+    drop_last: False
+    batch_size_per_card: 8
+    num_workers: 8
+    collate_fn: ListCollator
