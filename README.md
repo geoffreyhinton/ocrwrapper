@@ -11,5 +11,8 @@ python train_simple_layoutml.py -c config_wildreceipt.yml
 > Model saved to ./output/epoch_10.pdparams
 > [2025-09-22 15:46:04,031] [    INFO] train_simple_layoutml.py:385 - Training completed!
 
+
 # Evaluate Model
+push images you want to classify and extract information into test_images 
 python complete_pipeline.py
+check your result in output folder
